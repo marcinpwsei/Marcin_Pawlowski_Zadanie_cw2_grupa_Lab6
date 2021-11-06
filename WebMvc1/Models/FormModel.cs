@@ -1,14 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebMvc1.Models
 {
     public class FormModel
     {
-        [Display(Name = "Nazwa elementu")]
+        private const string polishname = "Imię";
+        
+        [Display(Name = polishname)]
         public string Name { get; set; }
-        [Display(Name = "Opis elementu")]
-        public string Description { get; set; }
-        [Display(Name = "Element widoczny?")]
-        public bool IsVisible { get; set; }
+        [Required]
+        public DateTime Date { get; set; }
+
+        [Required]
+
+        private const string polishDaysCount = "Liczba dni od urodzenia";
+
+        [Display(Name = polishDaysCount)]
+        public int NumberOfDaysFromBirthday
+        {
+            get
+            {
+                return Convert.ToInt32((DateTime.Now - Date).TotalDays);
+            }
+        }
     }
 }
